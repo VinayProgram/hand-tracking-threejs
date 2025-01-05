@@ -5,8 +5,9 @@ import { PerspectiveCamera } from '@react-three/drei'
 import { OrbitControls } from '@react-three/drei'
 import { Vector3, Euler, Camera } from 'three'
 import { useStore } from './store'
+import dynamic from 'next/dynamic'
 
-const Editor = () => {
+const EditorCanvas = () => {
   const { cameraDirection } = useStore()
   const cameraRef = useRef<Camera | null>(null)
 
@@ -72,5 +73,6 @@ const Editor = () => {
     </Canvas>
   )
 }
+const Editor = dynamic(() => Promise.resolve(EditorCanvas), { ssr: false })
 
 export default Editor
